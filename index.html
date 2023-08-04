@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Popup</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px; 
+    }
+    .btn {
+      display: block;
+      margin: 50px auto;
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+   
+      cursor: pointer;
+    }
+
+    .popup-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .popup-content {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 800px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-height: 90%;
+      overflow-y: auto;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .popup-container.open {
+      display: flex;
+    }
+
+    .close-button {
+      cursor: pointer;
+      float: right;
+      font-size: 24px;
+      font-weight: 400;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .close-button:hover {
+      transform: rotate(90deg);
+    }
+
+    h2 {
+      margin-top: 0;
+      padding-top: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      color: #3498db;
+      font-weight: 400;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .project-info p,
+    .employee-info p {
+      margin: 5px 0;
+    }
+
+    .project-details {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .project-details .column {
+      width: 48%;
+    }
+
+    .project-details p {
+      margin: 5px 0;
+    }
+    strong{
+        margin-right: 5px;
+        
+    }
+    
+
+    .submit-button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .submit-button:hover {
+      background-color: #2980b9;
+    }
+
+    .status-button {
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+   
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .status-button:hover {
+      background-color: #2980b9;
+    }
+
+    select {
+      width: fit-content;
+      padding: 4px;
+      border: 1px solid #3498db;
+      /* border-radius: 4px; */
+    }
+
+    .styled-select {
+      position: relative;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .styled-select select {
+      background: transparent;
+      padding: 5px;
+      font-size: 12px;
+      border: none;
+      /* border-radius: 4px; */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .styled-select:after {
+      content: '\25BC';
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 5px;
+      background: #2ecc71;
+      color: #fff;
+      font-size: 12px;
+      pointer-events: none;
+    }
+     option{
+        color: #2980b9;
+        border: 1px solid #2980b9;
+     }
+    .styled-select select option {
+      background-color: #f2f2f2;
+    }
+
+    .styled-select select:focus {
+      outline: none;
+    }
+    
+.popup-content::-webkit-scrollbar {
+      display: none; /* Hide the scrollbar for WebKit-based browsers (Chrome, Safari) */
+    }
+    
+    @media only screen and (max-width: 600px) {
+      /* Styles for mobile devices */
+      .popup-content {
+        width: 95%;
+        /* max-width: 100%; */
+      }
+
+      .project-details .column {
+        width: 100%;
+      }
+    }
+  </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+</head>
+<body>
+  <button onclick="showPopup()" class="btn">View Project Info</button>
+
+  <div class="popup-container" id="popupContainer">
+    <div class="popup-content">
+      <span class="close-button" onclick="closePopup()">&times;</span>
+      <h2>Project Info</h2>
+      <div class="project-info">
+        <p><strong>Project Title : </strong> Project XYZ</p>
+        <p><strong>Members : </strong> Member 1, Member 2, Member 3</p>
+      </div>
+
+      <h2>Employee Info</h2>
+      <div class="employee-info">
+        <p><strong>Role : </strong> Developer</p>
+        <p><strong>Employee ID : </strong> E12345</p>
+        <p><strong>Email ID : </strong> employee@example.com</p>
+      </div>
+
+      <h2>Project Details</h2>
+      <div class="project-details">
+        <div class="column">
+          <p><strong>Assign Date:</strong> </p><p>2023-08-03</p>
+          <p><strong>Deadline:</strong></p><p> 2023-09-30</p>
+          <p><strong>Priority:</strong> </p><p>High</p>
+          <p><strong>Score:</strong>
+          </p> <p><select>
+                <option value="" disabled selected style="color: #2980b9;">Give Score</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </p>
+        </div>
+        <div class="column">
+            <p><strong>Project-score:</strong> </p><p>9</p>
+            <p><strong>Status:</strong>
+                <button class="status-button">Delivered</button>
+              </p>
+          <p><strong>Change Status:</strong>
+          </p> <p>
+            <select>
+                <option value="" disabled selected  style="color: #2980b9;">Change-status</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </p>
+    
+        </div>
+      </div>
+
+      <button class="submit-button" onclick="closePopup()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    function showPopup() {
+      const popupContainer = document.getElementById('popupContainer');
+      popupContainer.classList.add('open');
+    }
+
+    function closePopup() {
+      const popupContainer = document.getElementById('popupContainer');
+      popupContainer.classList.remove('open');
+    }
+  </script>
+</body>
+</html>
